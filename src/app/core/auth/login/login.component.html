@@ -1,0 +1,46 @@
+<div class="p-card xl:w-4 mx-auto">
+  <div>
+    <h1 class="mx-auto text-center pt-4">Login</h1>
+  </div>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="flex flex-column gap-4 pb-4 align-items-center">
+      <div class="flex flex-column gap-4 w-15rem">
+        <p-floatLabel>
+          <input pInputText id="email" name="email" formControlName="email" class="p-fluid w-full" />
+          <label for="email">Email</label>
+        </p-floatLabel>
+        <p-floatLabel>
+          <p-password id="password" formControlName="password" [toggleMask]="true" [feedback]="false" class="p-fluid w-full"/>
+          <label for="password">Password</label>
+        </p-floatLabel>
+        <p-button label="Recover password" [text]="true" class="text-left" (click)="recoverPassword()"></p-button>
+      </div>
+
+      <div class="w-10rem flex flex-column gap-2">
+        <p-button type="submit"  label="Login" class="p-fluid" ></p-button>
+        <p-button label="Register" severity="info" class="p-fluid"></p-button>
+      </div>
+
+      <a class="no-underline" [href]="['/admin-login']">Login as Admin</a>
+    </div>
+
+  </form>
+</div>
+
+<p-dialog header="Recover Password" [(visible)]="displayDialog" [modal]="true">
+  <form [formGroup]="recoverPasswordForm">
+    <div class="p-field flex flex-column gap-2">
+      <label for="recover-email">Email</label>
+      <input id="recover-email" pInputText formControlName="email" placeholder="Enter your email" />
+      @if (!recoverPasswordForm.controls['email'].valid) {
+        <small class="p-error">
+          Please enter a valid email
+        </small>
+      }
+    </div>
+  </form>
+  <ng-template pTemplate="footer">
+    <button pButton icon="pi pi-times" label="Cancel" (click)="closeDialog()"></button>
+    <button pButton icon="pi pi-check" label="Send" type="submit" (click)="sendRecoveryEmail()" [disabled]="recoverPasswordForm.invalid"></button>
+  </ng-template>
+</p-dialog>
