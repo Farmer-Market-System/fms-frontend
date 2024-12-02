@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {apiBase} from '../constants/api-url';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FarmerService {
-  private apiUrl = 'http://localhost:5000/api/farmer';
+  private apiUrl = `${apiBase}/api/farmer`;
 
   constructor(private http: HttpClient) { }
 

@@ -1,11 +1,12 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {tap} from 'rxjs';
+import {apiBase} from '../constants/api-url';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
   httpClient = inject(HttpClient)
-  baseUrl = 'http://localhost:5000'
+  baseUrl = apiBase
 
   signupFarmer(data: any) {
     return this.httpClient.post(`${this.baseUrl}/api/auth/register/farmer`, data)
@@ -17,7 +18,8 @@ export class AuthService {
 
   login(data: any) {
     return this.httpClient.post(`${this.baseUrl}/api/auth/login`, data).pipe(tap((result: any) => {
-      localStorage.setItem('accessToken', result['accessToken']); localStorage.setItem('role', result['role'])
+      localStorage.setItem('accessToken', result['accessToken']);
+      localStorage.setItem('role', result['role'])
     }))
   }
 
@@ -31,8 +33,8 @@ export class AuthService {
     return localStorage.getItem('accessToken') !== null;
   }
 
-  getUserRole(): string | null {
-    return localStorage.getItem('role');
+  getUserRole(): string {
+    return localStorage.getItem('role') || 'user';
   }
 
   recoverPassword(email: string) {
@@ -40,6 +42,6 @@ export class AuthService {
   }
 
   resetPassword(recoverToken: string, newPassword: string) {
-    return this.httpClient.post(`${this.baseUrl}/api/auth/reset-password`, { recoverToken, newPassword });
+    return this.httpClient.post(`${this.baseUrl}/api/auth/reset-password`, {recoverToken, newPassword});
   }
 }

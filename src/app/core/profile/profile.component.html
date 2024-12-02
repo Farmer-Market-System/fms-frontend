@@ -1,0 +1,86 @@
+<div>
+  <div class="flex align-items-center justify-content-between">
+    <h2>Profile</h2>
+    <p-button severity="danger" label="Return Back" (click)="returnBack()"></p-button>
+  </div>
+
+  @if (role == 'farmer') {
+    <div class='flex flex-column px-3'>
+      <div class="flex flex-column">
+        <h2>Personal Details</h2>
+        <div class="flex justify-content-between">
+          <p>First Name</p>
+          <p>{{ profile.personalDetails.firstName }}</p>
+        </div>
+        <div class="flex justify-content-between">
+          <p>Last Name</p>
+          <p>{{ profile.personalDetails.lastName }}</p>
+        </div>
+        <div class="flex justify-content-between">
+          <p>Phone Number</p>
+          <p>{{ profile.personalDetails.phoneNumber }}</p>
+        </div>
+        <div class="flex justify-content-between">
+          <p>Address</p>
+          <p>{{ profile.personalDetails.address }}</p>
+        </div>
+        <div class="flex justify-content-between">
+          <p>Email</p>
+          <p>{{ profile.personalDetails.email }}</p>
+        </div>
+        <div class="flex justify-content-between">
+          <p>Email</p>
+          <p>{{ profile.personalDetails.email }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-column">
+      <h2>Farm Details</h2>
+      <div class="flex justify-content-between">
+        <p>Farm Name</p>
+        <p>{{ profile.farmDetails.farmName }}</p>
+      </div>
+      <div class="flex justify-content-between">
+        <p>Farm Size</p>
+        <p>{{ profile.farmDetails.farmSize }}</p>
+      </div>
+      <div class="flex justify-content-between">
+        <p>Location</p>
+        <p>{{ profile.farmDetails.location }}</p>
+      </div>
+    </div>
+  } @else if (role == 'buyer') {
+    <div class="flex flex-column px-3">
+      <div class="flex flex-column">
+        <h2>Personal Details</h2>
+        <div class="flex justify-content-between">
+          <p>First Name</p>
+          <p>{{ profile.personalDetails.firstName }}</p>
+        </div>
+        <div class="flex justify-content-between">
+          <p>Last Name</p>
+          <p>{{ profile.personalDetails.lastName }}</p>
+        </div>
+        <div class="flex justify-content-between">
+          <p>Phone Number</p>
+          <p>{{ profile.personalDetails.phoneNumber }}</p>
+        </div>
+        <div class="flex justify-content-between">
+          <p>Address</p>
+          <p>{{ profile.personalDetails.address }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-column">
+      <h2>Delivery Preferences</h2>
+      <div class="flex justify-content-between">
+        <p>Preferred Delivery Time</p>
+        <p>{{ profile.deliveryPreferences.preferredDeliveryTime }}</p>
+      </div>
+      <div class="flex justify-content-between">
+        <p>Delivery Address</p>
+        <p>{{ profile.deliveryPreferences.deliveryAddress }}</p>
+      </div>
+    </div>
+  }
+</div>

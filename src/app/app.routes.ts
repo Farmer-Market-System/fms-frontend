@@ -9,6 +9,7 @@ import {PendingFarmersComponent} from './pages/admin-dashboard/pages/pending-far
 import {ManageUsersComponent} from './pages/admin-dashboard/pages/manage-users/manage-users.component';
 import {ResetPasswordComponent} from './core/auth/reset-password/reset-password.component';
 import {BuyerDashboardComponent} from './pages/buyer-dashboard/buyer-dashboard.component';
+import {ProfileComponent} from './core/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,9 @@ export const routes: Routes = [
   },
   {
     path: 'reset-password', component: ResetPasswordComponent
+  },
+  {
+    path: 'profile', component: ProfileComponent, canActivate: [authGuard]
   },
   {
     path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [authGuard, roleGuard], data: {expectedRole: ['admin']}

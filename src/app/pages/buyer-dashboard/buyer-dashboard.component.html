@@ -2,34 +2,64 @@
   <div class="p-col-12">
     <h1 class="mx-auto text-center">Buyer Dashboard</h1>
   </div>
-  <div class="p-col-12 flex gap-2 mb-4">
-    <input type="text" pInputText placeholder="Search products" [(ngModel)]="searchTerm" />
+  <div class="p-col-12 flex gap-2 mb-4 xl:flex-row flex-wrap">
+    <input type="text" pInputText placeholder="Search products" [(ngModel)]="searchTerm"/>
     <p-button label="Search" (click)="searchProducts()"></p-button>
     <p-button label="Orders" severity="success"></p-button>
     <p-button label="Filters" severity="secondary"></p-button>
     <p-button label="Reports" severity="secondary"></p-button>
-    <p-button label="Profile"></p-button>
+    <a class="no-underline" pButton [href]="['/profile']" label="Profile"></a>
   </div>
   <div class="p-col-12">
     <p-table [value]="products" [paginator]="true" [rows]="10">
       <ng-template pTemplate="header">
         <tr>
+          <th>Product Id</th>
           <th>Name</th>
           <th>Category</th>
-          <th>Price</th>
+          <th>Price/tenge</th>
           <th>Location</th>
-          <th>Action</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-product>
         <tr>
-          <td>{{product.name}}</td>
-          <td>{{product.category}}</td>
-          <td>{{product.price}}</td>
-          <td>{{product.location}}</td>
-          <td><p-button label="Make order"></p-button></td>
+          <td>{{ product._id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.category }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.farmerId.farmDetails.location }}</td>
         </tr>
       </ng-template>
     </p-table>
   </div>
+</div>
+
+<div class="flex">
+  <p-button label="Make Order" (click)="makeOrderDialog()"></p-button>
+</div>
+<div>
+  <p-dialog header="Make Order" [(visible)]="orderDialog" styleClass="xl:w-8 w-12" [draggable]="false"
+            [resizable]="false" (onHide)="closeDialog()">
+    <div class="flex flex-column gap-2">
+      <div class="flex flex-column gap-2">
+        <h4>Products:</h4>
+        <div class="flex flex-column gap-2">
+        @for (product of selectedProducts; track product._id) {
+          <p-dropdown class="p-fluid w-full" [options]="products" [(ngModel)]="product.productId" optionLabel="name" optionValue="_id"
+                      placeholder="Select a product" [showClear]="true"></p-dropdown>
+          <div class="flex w-full justify-content-between">
+            <input type="number" [(ngModel)]="product.quantity" name="quantity{{product._id}}" placeholder="Quantity/kg"
+                   required>
+            <p-button label="Remove" severity="help" (click)="removeProduct(product._id)"></p-button>
+          </div>
+        }
+        </div>
+        <p-button label="Add Product" class="mt-2" severity="contrast" (click)="addProduct()"></p-button>
+      </div>
+      <div class="center-button">
+        <button pButton type="button" label="Make Order" (click)="makeOrder()"></button>
+      </div>
+    </div>
+  </p-dialog>
+
 </div>
