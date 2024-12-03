@@ -8,12 +8,9 @@ export class AuthService {
   httpClient = inject(HttpClient)
   baseUrl = apiBase
 
-  signupFarmer(data: any) {
-    return this.httpClient.post(`${this.baseUrl}/api/auth/register/farmer`, data)
-  }
 
-  signupBuyer(data: any) {
-    return this.httpClient.post(`${this.baseUrl}/api/auth/register/buyer`, data)
+  register(data: any, userType: string) {
+    return this.httpClient.post(`${this.baseUrl}/api/auth/register/${userType}`, data)
   }
 
   login(data: any) {

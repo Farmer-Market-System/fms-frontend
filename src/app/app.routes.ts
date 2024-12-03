@@ -10,6 +10,8 @@ import {ManageUsersComponent} from './pages/admin-dashboard/pages/manage-users/m
 import {ResetPasswordComponent} from './core/auth/reset-password/reset-password.component';
 import {BuyerDashboardComponent} from './pages/buyer-dashboard/buyer-dashboard.component';
 import {ProfileComponent} from './core/profile/profile.component';
+import {OrderComponent} from './pages/order/order.component';
+import {RegisterComponent} from './core/auth/register/register.component';
 
 export const routes: Routes = [
   {
@@ -17,6 +19,9 @@ export const routes: Routes = [
   },
   {
     path: 'login', component: LoginComponent
+  },
+  {
+    path: 'register', component: RegisterComponent
   },
   {
     path: 'admin-login', component: LoginAdminComponent
@@ -29,6 +34,9 @@ export const routes: Routes = [
   },
   {
     path: 'profile', component: ProfileComponent, canActivate: [authGuard]
+  },
+  {
+    path: 'orders', component: OrderComponent, canActivate: [authGuard]
   },
   {
     path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [authGuard, roleGuard], data: {expectedRole: ['admin']}

@@ -18,7 +18,7 @@
 
       <div class="w-10rem flex flex-column gap-2">
         <p-button type="submit"  label="Login" class="p-fluid" ></p-button>
-        <p-button label="Register" severity="info" class="p-fluid"></p-button>
+        <a pButton label="Register" severity="info" [href]="['/register']" class="p-fluid"></a>
       </div>
 
       <a class="no-underline" [href]="['/admin-login']">Login as Admin</a>
